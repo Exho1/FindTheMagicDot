@@ -7,7 +7,7 @@ public class Movement : MonoBehaviour
 {
 
     float speed = 500f;
-    float rotation_speed = 30f;
+    float rotation_speed = 40f;
     Rigidbody rb;
     float current_angle;
     public GameObject guide_view;
