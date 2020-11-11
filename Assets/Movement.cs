@@ -62,11 +62,10 @@ public class Movement : MonoBehaviour
         guide_view.transform.position = new Vector3(transform.position.x, guide_view.transform.position.y, transform.position.z);
     }
 
+    //When the seeker comes into contact with the magic dot the magic dot is destroyed.
+    //TODO: trigger the game end scene
     void OnCollisionEnter(Collision collision)
-    {
-
-        // Collision col = collision.GetComponent<Collider>();
-
+    { 
         if (collision.gameObject.tag == "Finish")
         {
             Destroy(collision.gameObject);
