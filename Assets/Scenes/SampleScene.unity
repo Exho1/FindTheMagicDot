@@ -494,7 +494,10 @@ MonoBehaviour:
     type: 3}
   autoCreatePlayer: 1
   playerSpawnMethod: 0
-  spawnPrefabs: []
+  spawnPrefabs:
+  - {fileID: 1099278694780267486, guid: a2715d3133dfffb41a4fe0b286352a71, type: 3}
+  MagicDotPrefab: {fileID: 1099278694780267486, guid: a2715d3133dfffb41a4fe0b286352a71,
+    type: 3}
 --- !u!4 &1972185862
 Transform:
   m_ObjectHideFlags: 0

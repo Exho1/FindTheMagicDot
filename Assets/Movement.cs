@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Security.Cryptography;
 using UnityEngine;
 
@@ -18,6 +19,9 @@ public class Movement : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         current_angle = 0;
         guide_view = GameObject.FindWithTag("Guide");
+        gameObject.GetComponent<Renderer>().material.color = Color.green;
+        GameObject.FindWithTag("Finish").GetComponent<Renderer>().material.color = Color.red;
+
     }
 
     // Update is called once per frame
@@ -56,5 +60,16 @@ public class Movement : MonoBehaviour
 
         //Updates the guide's point of view in the x and z directions to be directly over the seeker
         guide_view.transform.position = new Vector3(transform.position.x, guide_view.transform.position.y, transform.position.z);
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+
+        // Collision col = collision.GetComponent<Collider>();
+
+        if (collision.gameObject.tag == "Finish")
+        {
+            Destroy(collision.gameObject);
+        }
     }
 }

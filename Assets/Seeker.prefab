@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: -3334906007969420623}
   - component: {fileID: 3928437270003063598}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: Seeker
   m_TagString: Seeker
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -141,6 +141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f6fe00b920f0f9479ec3a621f2c7a16, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  guide_view: {fileID: 0}
 --- !u!20 &3928437270003063598
 Camera:
   m_ObjectHideFlags: 0
