@@ -12,6 +12,11 @@ public class Movement : MonoBehaviour
     Rigidbody rb; //Holds the seeker object
     float current_angle; //The current angle the Seeker is facing from the negative x axis
     public GameObject guide_view; //Holds the guide camera
+    GameObject magic_dot; //Holds the magic dot
+    GameObject scanner; //Holds the scanner light
+    bool scanner_light_on;
+    float scanner_blink_rate;
+    int time_elapsed;
 
     // Start is called before the first frame update
     void Start()
@@ -20,7 +25,12 @@ public class Movement : MonoBehaviour
         current_angle = 0;
         guide_view = GameObject.FindWithTag("Guide");
         gameObject.GetComponent<Renderer>().material.color = Color.green;
-        GameObject.FindWithTag("Finish").GetComponent<Renderer>().material.color = Color.red;
+        magic_dot = GameObject.FindWithTag("MagicDot");
+        magic_dot.GetComponent<Renderer>().material.color = Color.red;
+        scanner = GameObject.FindWithTag("Scanner");
+        scanner_light_on = false;
+        time_elapsed = 0;
+
 
     }
 
@@ -31,6 +41,8 @@ public class Movement : MonoBehaviour
         float xDir = (float)Math.Cos(current_angle * Math.PI / 180);
         //Multiplier for the speed in the z direction
         float zDir = (float)Math.Sin(current_angle * Math.PI / 180);
+
+        scanner_blink_rate = get_distance_between(gameObject, magic_dot);
 
         //If the W key is held down the seeker travels forward
         if (Input.GetKey(KeyCode.W))
@@ -60,6 +72,23 @@ public class Movement : MonoBehaviour
 
         //Updates the guide's point of view in the x and z directions to be directly over the seeker
         guide_view.transform.position = new Vector3(transform.position.x, guide_view.transform.position.y, transform.position.z);
+
+        time_elapsed++;
+
+        if(time_elapsed >= scanner_blink_rate)
+        {
+            scanner_light_on = !scanner_light_on;
+            time_elapsed = 0;
+        }
+
+        if (scanner_light_on)
+        {
+            scanner.GetComponent<Renderer>().material.color = Color.green;
+        }
+        else
+        {
+            scanner.GetComponent<Renderer>().material.color = Color.black;
+        }
     }
 
     //When the seeker comes into contact with the magic dot the magic dot is destroyed.
@@ -70,5 +99,10 @@ public class Movement : MonoBehaviour
         {
             Destroy(collision.gameObject);
         }
+    }
+
+    float get_distance_between(GameObject ob1, GameObject ob2)
+    {
+        return (float)Math.Sqrt(Math.Pow(ob1.transform.position.x - ob2.transform.position.x, 2) + Math.Pow(ob1.transform.position.z - ob2.transform.position.z, 2));
     }
 }
