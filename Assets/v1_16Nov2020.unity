@@ -30207,6 +30207,80 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 39fff188d323b9941931bf3f5c28d1d7, type: 3}
+--- !u!1 &1552404566 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1948977645079602, guid: 1264c01c7f8182e47ac9f784af03d895,
+    type: 3}
+  m_PrefabInstance: {fileID: 1079616905}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1552404567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1552404566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3737438748cf23f448d18cd2c6192e95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tokens:
+    _tokens: []
+  _roomName: Global
+  _useTrigger: 0
+--- !u!114 &1552404568
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1552404566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a066ddbf125f9546bcadc947418566b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _tokens:
+    _tokens: []
+  _channelTypeExpanded: 1
+  _metadataExpanded: 1
+  _activationModeExpanded: 1
+  _tokensExpanded: 1
+  _ampExpanded: 0
+  _activationFaderSettings:
+    _volume: 1
+    _fadeInTicks: 0
+    _fadeOutTicks: 1500000
+  _triggerFaderSettings:
+    _volume: 1
+    _fadeInTicks: 7500000
+    _fadeOutTicks: 11500000
+  _broadcastPosition: 1
+  _channelType: 0
+  _inputName: 
+  _mode: 1
+  _muted: 0
+  _playerId: 
+  _useTrigger: 0
+  _roomName: Global
+  _priority: -2
+--- !u!114 &1552404569
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1552404566}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b91ecbcc199f4492b9a91e820070131, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneId: 3096710349
+  serverOnly: 0
+  m_AssetId: 1264c01c7f8182e47ac9f784af03d895
+  hasSpawned: 0
 --- !u!1 &1556355335
 GameObject:
   m_ObjectHideFlags: 0
