@@ -1,5 +1,5 @@
 sceneSetups:
-- path: Assets/v1_16Nov2020.unity
+- path: Assets/Nov23NewMap.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
