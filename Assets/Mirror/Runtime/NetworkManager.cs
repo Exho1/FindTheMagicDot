@@ -1470,7 +1470,9 @@ namespace Mirror
         /// This is invoked when a server is started - including when a host is started.
         /// <para>StartServer has multiple signatures, but they all cause this hook to be called.</para>
         /// </summary>
-        public virtual void OnStartServer() { }
+        public virtual void OnStartServer() {
+            SpawnMagicDot();
+        }
 
         /// <summary>
         /// This is invoked when the client is started.
@@ -1493,5 +1495,53 @@ namespace Mirror
         public virtual void OnStopHost() { }
 
         #endregion
+        public GameObject MagicDotPrefab;
+
+        // Register prefab and connect to the server
+        public void ClientConnect()
+        {
+            ClientScene.RegisterPrefab(MagicDotPrefab);
+            NetworkClient.RegisterHandler<ConnectMessage>(OnClientConnect);
+            NetworkClient.Connect("localhost");
+        }
+
+        void OnClientConnect(NetworkConnection conn, ConnectMessage msg)
+        {
+            Debug.Log("Connected to server: " + conn);
+        }
+
+        public void ServerListen()
+        {
+            NetworkServer.RegisterHandler<ConnectMessage>(OnServerConnect);
+            NetworkServer.RegisterHandler<ReadyMessage>(OnClientReady);
+
+            // start listening, and allow up to 4 connections
+            NetworkServer.Listen(4);
+        }
+
+        void OnClientReady(NetworkConnection conn, ReadyMessage msg)
+        {
+            Debug.Log("Client is ready to start: " + conn);
+            NetworkServer.SetClientReady(conn);
+        }
+
+        void SpawnMagicDot()
+        {
+            System.Random rand = new System.Random();
+
+            int[] xvals = { 500, 500, 480, 535, 535, 473, 500, 515, 535, 535, 495, 520, 510 };
+            int[] yvals = { 490, 510, 500, 510, 495, 493, 520, 520, 520, 515, 495, 525, 495 };
+
+            int spawn_point = rand.Next(0, 10);
+
+            GameObject magic_dot = Instantiate(MagicDotPrefab, new Vector3(xvals[spawn_point], 2, yvals[spawn_point]), Quaternion.identity);
+            NetworkServer.Spawn(magic_dot);
+
+        }
+
+        void OnServerConnect(NetworkConnection conn, ConnectMessage msg)
+        {
+            Debug.Log("New client connected: " + conn);
+        }
     }
 }
