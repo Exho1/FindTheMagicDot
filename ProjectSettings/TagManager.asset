@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Seeker
   - Guide
+  - Scanner
+  - MagicDot
   layers:
   - Default
   - TransparentFX
