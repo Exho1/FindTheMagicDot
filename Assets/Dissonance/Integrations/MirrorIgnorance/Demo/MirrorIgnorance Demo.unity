@@ -293,6 +293,7 @@ MonoBehaviour:
   autoCreatePlayer: 1
   playerSpawnMethod: 0
   spawnPrefabs: []
+  MagicDotPrefab: {fileID: 0}
 --- !u!114 &1741379439
 MonoBehaviour:
   m_ObjectHideFlags: 0
