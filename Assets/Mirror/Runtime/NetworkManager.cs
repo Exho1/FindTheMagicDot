@@ -1367,6 +1367,7 @@ namespace Mirror
         public virtual void OnServerSceneChanged(string sceneName) { }
 
         #endregion
+        public GameObject GuidePrefab;
 
         #region Client System Callbacks
 
@@ -1389,6 +1390,22 @@ namespace Mirror
                     ClientScene.AddPlayer(conn);
                 }
             }
+
+            SpawnMagicDot();
+
+            System.Random rand = new System.Random();
+
+            int[] xvals = { 500, 500, 480, 535, 535, 473, 500, 515, 535, 535, 495, 520, 510 };
+            int[] yvals = { 490, 510, 500, 510, 495, 493, 520, 520, 520, 515, 495, 525, 495 };
+
+            int spawn_point = rand.Next(0, 10);
+
+            GameObject player = Instantiate(playerPrefab, new Vector3(xvals[spawn_point], 2, yvals[spawn_point]), Quaternion.identity);
+            NetworkServer.Spawn(player);
+            GameObject guide = Instantiate(GuidePrefab, new Vector3(xvals[1], 20, yvals[1]), Quaternion.identity);
+            NetworkServer.Spawn(guide); 
+     
+
         }
 
         /// <summary>
@@ -1495,7 +1512,6 @@ namespace Mirror
         public virtual void OnStopHost() { }
 
         #endregion
-
         public GameObject MagicDotPrefab;
 
         // Register prefab and connect to the server
@@ -1524,6 +1540,7 @@ namespace Mirror
         {
             Debug.Log("Client is ready to start: " + conn);
             NetworkServer.SetClientReady(conn);
+           
         }
 
         void SpawnMagicDot()

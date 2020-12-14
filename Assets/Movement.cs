@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Security.Cryptography;
 using UnityEngine;
+using UnityEngine.SceneManagement; 
 
 public class Movement : MonoBehaviour
 {
 
     float movement_speed = 500f;
-    float rotation_speed = 80f;
+    float rotation_speed = 60f;
     Rigidbody rb; //Holds the seeker object
     float current_angle; //The current angle the Seeker is facing from the negative x axis
     public GameObject guide_view; //Holds the guide camera
@@ -72,6 +73,7 @@ public class Movement : MonoBehaviour
 
         //Updates the guide's point of view in the x and z directions to be directly over the seeker
         guide_view.transform.position = new Vector3(transform.position.x, guide_view.transform.position.y, transform.position.z);
+        guide_view.transform.eulerAngles = new Vector3(90, 0, 0); 
 
         time_elapsed++;
 
@@ -97,7 +99,7 @@ public class Movement : MonoBehaviour
     {
         if (collision.gameObject.tag == "MagicDot")
         {
-            Destroy(collision.gameObject);
+            //SceneManager.LoadScene("EndGameScene");
         }
     }
 
