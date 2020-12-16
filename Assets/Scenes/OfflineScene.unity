@@ -389,9 +389,11 @@ MonoBehaviour:
   spawnPrefabs:
   - {fileID: 3655985935126935199, guid: 81ecfd87b69765646b3ea6e3a8384409, type: 3}
   - {fileID: 2228228002516673698, guid: d242a18650e2e9147b506b92913046d6, type: 3}
+  MagicDotPrefab: {fileID: 2228228002516673698, guid: d242a18650e2e9147b506b92913046d6,
+    type: 3}
   GuidePrefab: {fileID: 3655985935126935199, guid: 81ecfd87b69765646b3ea6e3a8384409,
     type: 3}
-  MagicDotPrefab: {fileID: 2228228002516673698, guid: d242a18650e2e9147b506b92913046d6,
+  SeekerPrefab: {fileID: 1087640962598995127, guid: 61644235d3e755643860b38e3231c77a,
     type: 3}
 --- !u!4 &1134830727
 Transform:

@@ -1367,7 +1367,6 @@ namespace Mirror
         public virtual void OnServerSceneChanged(string sceneName) { }
 
         #endregion
-        public GameObject GuidePrefab;
 
         #region Client System Callbacks
 
@@ -1391,21 +1390,20 @@ namespace Mirror
                 }
             }
 
-            SpawnMagicDot();
+           
 
             System.Random rand = new System.Random();
 
-            int[] xvals = { 500, 500, 480, 535, 535, 473, 500, 515, 535, 535, 495, 520, 510 };
-            int[] yvals = { 490, 510, 500, 510, 495, 493, 520, 520, 520, 515, 495, 525, 495 };
+            int spawn_location_1 = rand.Next(0, 10);
+            SpawnMagicDot(spawn_location_1);
 
-            int spawn_point = rand.Next(0, 10);
-
-            GameObject player = Instantiate(playerPrefab, new Vector3(xvals[spawn_point], 2, yvals[spawn_point]), Quaternion.identity);
-            NetworkServer.Spawn(player);
-            GameObject guide = Instantiate(GuidePrefab, new Vector3(xvals[1], 20, yvals[1]), Quaternion.identity);
-            NetworkServer.Spawn(guide); 
-     
-
+            int spawn_location_2 = rand.Next(0, 10);
+            while (spawn_location_1 == spawn_location_2)
+            {
+                spawn_location_2 = rand.Next(0, 10);
+            }
+            SpawnPlayer(spawn_location_2);
+            SpawnGuide();
         }
 
         /// <summary>
@@ -1415,6 +1413,7 @@ namespace Mirror
         /// <param name="conn">Connection to the server.</param>
         public virtual void OnClientDisconnect(NetworkConnection conn)
         {
+          
             StopClient();
         }
 
@@ -1488,7 +1487,6 @@ namespace Mirror
         /// <para>StartServer has multiple signatures, but they all cause this hook to be called.</para>
         /// </summary>
         public virtual void OnStartServer() {
-            SpawnMagicDot();
         }
 
         /// <summary>
@@ -1504,7 +1502,12 @@ namespace Mirror
         /// <summary>
         /// This is called when a client is stopped.
         /// </summary>
-        public virtual void OnStopClient() { }
+        public virtual void OnStopClient() {
+            Destroy(GameObject.FindWithTag("Seeker"));
+            Destroy(GameObject.FindWithTag("Guide"));
+            Destroy(GameObject.FindWithTag("MagicDot"));
+
+        }
 
         /// <summary>
         /// This is called when a host is stopped.
@@ -1525,6 +1528,7 @@ namespace Mirror
         void OnClientConnect(NetworkConnection conn, ConnectMessage msg)
         {
             Debug.Log("Connected to server: " + conn);
+            
         }
 
         public void ServerListen()
@@ -1540,20 +1544,39 @@ namespace Mirror
         {
             Debug.Log("Client is ready to start: " + conn);
             NetworkServer.SetClientReady(conn);
-           
+            
         }
 
-        void SpawnMagicDot()
-        {
-            System.Random rand = new System.Random();
+        public GameObject GuidePrefab;
+        public GameObject SeekerPrefab;
 
+       void SpawnPlayer(int r)
+        {
             int[] xvals = { 500, 500, 480, 535, 535, 473, 500, 515, 535, 535, 495, 520, 510 };
             int[] yvals = { 490, 510, 500, 510, 495, 493, 520, 520, 520, 515, 495, 525, 495 };
 
-            int spawn_point = rand.Next(0, 10);
+            GameObject player = Instantiate(SeekerPrefab, new Vector3(xvals[r], 2, yvals[r]), Quaternion.identity);
+            NetworkServer.Spawn(player);
+        }
 
-            GameObject magic_dot = Instantiate(MagicDotPrefab, new Vector3(xvals[spawn_point], 2, yvals[spawn_point]), Quaternion.identity);
+       void SpawnGuide()
+        {
+
+            GameObject guide = Instantiate(GuidePrefab, new Vector3(100, 20, 100), Quaternion.identity);
+            NetworkServer.Spawn(guide);
+
+        }
+
+        void SpawnMagicDot(int r)
+        {
+          
+            int[] xvals = { 500, 500, 480, 535, 535, 473, 500, 515, 535, 535, 495, 520, 510 };
+            int[] yvals = { 490, 510, 500, 510, 495, 493, 520, 520, 520, 515, 495, 525, 495 };
+
+            GameObject magic_dot = Instantiate(MagicDotPrefab, new Vector3(xvals[r], 2, yvals[r]), Quaternion.identity);
             NetworkServer.Spawn(magic_dot);
+
+            Debug.Log("Magic Dot Spawned at location " + r);
 
         }
 
