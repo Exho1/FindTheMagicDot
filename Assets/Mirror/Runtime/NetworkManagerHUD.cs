@@ -79,14 +79,14 @@ namespace Mirror
                 // Server + Client
                 if (Application.platform != RuntimePlatform.WebGLPlayer)
                 {
-                    if (GUILayout.Button("Host (Server + Client)"))
+                    /*if (GUILayout.Button("Host (Server + Client)"))
                     {
                         manager.StartHost();
-                    }
+                    }*/
                 }
 
                 // Client + IP
-                GUILayout.BeginHorizontal();
+                /*GUILayout.BeginHorizontal();
                 if (GUILayout.Button("Client"))
                 {
                     manager.StartClient();
@@ -103,7 +103,7 @@ namespace Mirror
                 else
                 {
                     if (GUILayout.Button("Server Only")) manager.StartServer();
-                }
+                }*/
             }
             else
             {
